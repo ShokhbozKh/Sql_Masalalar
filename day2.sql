@@ -1,0 +1,432 @@
+--####=================== SELECT =======####
+--1
+--SELECT *FROM Customers;
+--2
+--SELECT FirstName as Ismi, LastName as Familyasi, Title Kasbi FROM Employees;
+--3
+--SELECT ProductName, UnitPrice FROM Products;
+--4
+--SELECT *FROM Orders
+--5
+--SELECT CompanyName as 'Kompaniya nomi' FROM Shippers;
+--6
+--SELECT CompanyName [Kampaniya nomi], ContactName [Bog'lanish nomi] FROM Suppliers
+--7
+--SELECT CategoryName, Description FROM Categories
+--8
+--SELECT *FROM Region
+--9
+--SELECT *FROM Territories;
+--10
+--SELECT *FROM [Order Details]
+
+/*===============================Select distinct */
+
+--1
+--Select distinct Country from Customers
+--2
+--Select Distinct Title From Employees
+--3
+--Select distinct CategoryId from Products
+--4
+--select count(distinct orderDate) from orders
+--5
+--select quantityperunit from Products
+--6
+--select *from Products
+--select distinct CategoryID from products
+--7
+--select distinct city from Suppliers
+--8
+--select distinct ContactName From Customers
+--9
+--select distinct Shipvia from orders
+--10
+--select distinct RegionID from Territories
+
+--#######=======================where====######
+--1
+--select *from Customers
+--where Country = 'Germany'
+--2
+--select *from Products
+--where UnitPrice > 20;
+--3
+--select *from Employees
+--where title like 'Sales Representative'
+--4
+--select *from orders
+--where Year(OrderDate) = 1997
+--5
+--select *from Products
+--where categoryid=1;
+--6
+--Select *from Customers
+--where ContactTitle = 'Owner'
+--7
+--select *from Employees
+--where Year(BirthDate) < 1960
+--8
+--select *from orders
+--where ShipVia=2
+--9
+--select *from Products
+--where productName like 'C%'
+--10
+--select *from customers
+--where region is null
+
+/* Order by , asc, disc  */
+--1
+--select productname, UnitPrice from Products
+--order by UnitPrice
+--2
+--select *from Products
+--order by UnitPrice desc
+--3
+--select *from customers
+--order by CompanyName asc
+--4
+--select *from employees
+--order by BirthDate asc
+--5
+--select *from orders
+--order by OrderDate desc
+--6
+--select *from Products
+--order by ProductName desc
+--7
+--select CompanyName From Shippers
+--order by CompanyName asc
+--8
+--select FirstName, LastName 
+--From Employees
+--order by LastName asc
+--9
+--select FirstName, LastName
+--From Employees
+--order by LastName
+--10
+--select CompanyName, City
+--From dbo.Suppliers
+--order by city desc
+
+/* ================== And Or Not ======*/
+--1
+--Select ProductName, UnitPrice, CategoryId
+--From Products
+--Where UnitPrice>20 and CategoryID=1;
+--2
+--Select *
+--From Customers
+--Where Country = 'Germany' and ContactTitle = 'Owner'
+
+--3
+--Select *
+--From Employees
+--Where Title Like 'Sales Manager' or Title ='Vice President'
+--4
+--Select OrderId, ShipVia
+--From Orders
+--Where ShipVia =1 or ShipVia=2;
+--5
+--Select ProductName, UnitPrice, UnitsInStock
+--From Products
+--Where UnitPrice > 50 OR UnitsInStock < 10
+--6
+--Select CustomerId, Country
+--From Customers
+--Where Country not Like 'USA'
+--7
+--Select ProductName, CategoryID
+--From Products
+--Where CategoryID not in (1,2)
+--8
+--Select FirstName, BirthDate, Title
+--From Employees
+--Where YEAR(BirthDate)>1960 and not Title = 'Sales Representative'
+--9
+--Select OrderId, ShipCountry, ShipVia
+--From Orders
+--Where ShipCountry in ('Brazil', 'Mexico') and ShipVia !=3
+--10
+--Select ProductName, UnitPrice, CategoryId
+--From Products
+--Where (UnitPrice >10 and UnitPrice<30) and CategoryID !=2 
+--
+/* ==================== Nul,  Not null */
+--6
+--Select EmployeeId, FirstName, Region
+--From Employees
+--Where Region is not null
+--7
+--Select ProductId, ProductName, QuantityPerUnit
+--From Products
+--Where QuantityPerUnit is NULL
+--8
+--Select ProductId, ProductName, UnitPrice
+--From Products
+--Where UnitPrice is null
+--9
+--Select SupplierId, CompanyName, Fax
+--From Suppliers
+--Where Fax is null
+--10
+--Select ShipperId, CompanyName, Phone
+--From Shippers
+--Where Phone is not null
+--
+/*======================= Select top */
+--1
+--Select Top 5 *
+--From Customers
+--2
+--Select Top 3 *
+--From Products
+--Order by UnitPrice desc
+--3
+--Select OrderId, OrderDate
+--From Orders
+--Order by OrderDate desc
+--4
+--Select top 1 FirstName, LastName, city, Country, HireDate
+--From Employees
+--Order by HireDate Asc
+--5
+--Select top 5 *
+--From Products
+--order by UnitPrice Asc
+--6
+--Select top 2*
+--From Shippers
+--order by ShipperID
+--7
+--Select Top 1 *
+--From Categories
+--Order by CategoryID
+--8
+--Select Top 3 *
+--From Suppliers
+--Order by SupplierID asc
+
+--9
+--Select top 5 *
+--From [Order Details]
+--Order by Quantity desc
+--10
+--Select Top 1 *
+--From Orders
+--Order by OrderDate asc
+
+/* =============  Aggregate Func ============ */
+--1
+--Select Min(UnitPrice) as Narxi
+--From Products
+--2
+--Select Max(UnitPrice) as Narxi
+--From Products
+--3
+--Select Avg(Distinct(UnitPrice))
+--From Products
+--4
+--Select Count(*)
+--From Products
+--5
+--Select Sum([Order Details].UnitPrice)
+--From [Order Details]
+--6
+--Select Count(Orders.OrderID)
+--From Orders
+--7
+--Select Min(Employees.HireDate)
+--From Employees
+--8
+--Select Max(OrderDate)
+--From Orders
+--9
+--Select Sum(UnitPrice)
+--From [Order Details]
+--10
+--Select CategoryID, count( ProductId)
+--From Products
+--Group by CategoryId
+--11
+--Select Year(OrderDate) as Yil, count(*) as [Buyurtma Soni]
+--From Orders
+--Group by Year(OrderDate)
+--12
+--Select CategoryId, Avg(UnitPrice)
+--From Products
+--Group by CategoryID
+--13
+--Select SupplierID, Count(*)
+--From Products
+--Group by SupplierID
+--14
+--Select ProductId, Avg(UnitPrice)
+--From [Order Details]
+--Group by ProductID
+--15
+--Select ShipVia, Count(*)
+--From Orders
+--Group by ShipVia
+
+/* =============  Group By ============ */
+--1
+--Select Country, Count(*)
+--From Customers
+--Group by Country
+--2
+--Select CategoryId, Count(*)
+--From Products
+--Group by CategoryId
+--3
+--Select CategoryId, AVG(UnitPrice)
+--From Products
+--Group by CategoryID
+--4
+--Select EmployeeId, Count(*)
+--From Orders
+--Group by EmployeeId
+--5
+--Select ProductId, count(*)
+--From dbo.[Order Details]
+--Group by ProductId
+--6
+--Select Country, ContactTitle, Count(*)
+--From Customers
+--Group by ContactTitle, Country
+--7
+--Select ProductId, SUM(Quantity)
+--From [Order Details]
+--Group by ProductID
+--Order by ProductID
+--8
+--Select SupplierId, Count(*)
+--From Products
+--Group by SupplierID
+--9
+--SELECT EmployeeId, AVG(DATEDIFF(DAY, OrderDate, ShippedDate)) AS AvgShippingDays
+--FROM Orders
+--GROUP BY EmployeeId;
+--10
+--Select Year(OrderDate), Count(*)
+--From Orders
+--Group by Year(OrderDate);
+
+/* =============  Like, In, Between, WildCard ============ */
+--1
+--Select *
+--From Customers
+--Where CompanyName LIKE 'A%'
+--2
+--Select *
+--From Customers
+--Where CompanyName LIKE '%market%'
+--3
+--Select ProductName
+--From Products
+--Where ProductName LiKE 'Chef%'
+--4
+--Select ProductName
+--From Products
+--Where ProductName LIKE '%Mix%'
+--5
+--Select CustomerId, Country
+--From Customers
+--Where Country in ('usa','germany','france');
+--6
+--Select OrderId, ShipVia
+--From Orders
+--Where ShipVia in (1,2)
+--7
+--Select ProductName, UnitPrice
+--From Products
+--Where UnitPrice between 10 and 30
+--8
+--Select OrderID, OrderDate
+--From Orders
+--Where OrderDate between '1997-01-01' and '1997-12-31'
+--9
+--Select ProductName as Mahsulot, UnitPrice as puli
+--From Products
+--10
+--Select CompanyName as Customer, Country as Mamlakati
+--From Customers
+
+/* =============  Having ============ */
+--1
+--Select Country,Count(*)
+--From Customers
+--Group by Country
+--having count(*) >5
+--2
+--Select CategoryId, Count(*)
+--From Products
+--Group by CategoryId
+--Having Avg(UnitPrice) > 30
+--3
+--Select CategoryID, count(*)
+--From Products
+--Group by CategoryID
+--Having count(*) > 10;
+--4
+--Select  ProductID, Sum(UnitPrice)
+--From [Order Details]
+--Group by ProductID
+--Having Sum(UnitPrice) > 200;
+--5
+--Select EmployeeID , count(*)
+--From Orders
+--Group by  EmployeeID
+--having count(*) > 100
+--6
+--Select SupplierID, Sum(UnitPrice)
+--From Products
+--Group by SupplierID
+--Having max(UnitPrice) > 50
+--7
+--Select OrderId, sum(Quantity * UnitPrice)
+--From [Order Details]
+--Group by OrderID
+--Having SUM(quantity * unitprice) > 1000
+--8
+--Select Year(Orderdate), count(*)
+--From Orders
+--Group by Year(OrderDate)
+--Having count(*) > 200;
+--9
+--Select ContactTitle, count(*)
+--From Customers
+--Group by ContactTitle
+--having COUNT(*)<3
+--10
+--Select CategoryID, 
+--	COUNT(*) as soni,
+--	AVG(UnitPrice) as narxi
+--From Products
+--group by CategoryID
+--Having count(*)>10 and  sum(UnitPrice) >20;
+
+/* =============  1-bob yakuni ============ */
+--1
+
+--2
+--3
+--4
+--5
+--6
+--7
+--8
+--9
+--10
+--11
+--12
+--13
+--14
+--15
+
+
+
+
+
